@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App'
+import Input from './Input'
 import './index.css'
-import Button from 'react-bootstrap/Button';
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-    <App/>
+    <Input/>
 );

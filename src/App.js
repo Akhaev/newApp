@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-
 function App() { 
 
     const [messages, setMessages] = useState([
@@ -55,7 +54,7 @@ function App() {
                                 <div>
                                 {message.author}
                                 </div>
-                                <Button variant="outline-danger" onClick={() => deleteMessage(message.id)}>X</Button>{' '}
+                                <Button variant="danger" onClick={() => {deleteMessage(message.id)}}>Delete</Button>{' '}
                             </div>
                         </div>
                     </div>            
