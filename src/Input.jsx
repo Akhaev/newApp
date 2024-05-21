@@ -20,9 +20,12 @@ const Input = () => {
  
     const handlerAdd = () => {
         setText('')
-        setTodos([{
-            text: text
-        }])
+        setTodos([
+            ...todos,
+            {
+                text: text
+            }
+        ])
     }
     
     return (
