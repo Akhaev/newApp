@@ -1,67 +1,52 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import ToDo from './ToDo';
+import ToDoForm from './ToDoForm';
 
-function App() { 
+function App() {
 
-    const [messages, setMessages] = useState([
-        {
-            id: 1,
-            text: 'Hello',
-            author: 'user',
-            side: 'outbox'
-        },
-        {
-            id: 2,
-            text: 'Hi',
-            author: 'admin',
-            side: 'inbox'
-        },
-        {
-            id: 3,
-            text: 'How are you',
-            author: 'user',
-            side: 'outbox'
-        },
-        {
-            id: 4,
-            text: 'I am fine',
-            author: 'admin',
-            side: 'inbox'
-        },
-    ])
+    const [todos, setTodos] = useState([])
 
-    const deleteMessage = (id) => {
-        setMessages (
-            messages.filter(item => {
-                if(item.id === id) {
-                    return false
-                }
-                return item
-            })
-        )
+    const addTask = (userInput) => {
+        if (userInput) {
+            const newItem = {
+                id: Math.random().toString(36).substr(2, 9),
+                task: userInput,
+                completed: false
+            }
+            setTodos([...todos, newItem])
+        }
+    }
+    const removeTask = (id) => {
+        setTodos([...todos.filter((item) => item.id !== id)])
+    }
+    const handlerToggle = (id) => {
+        setTodos([
+            ...todos.map((todo) => 
+                todo.id === id ? {...todo, completed: !todo.completed} : {...todo}
+            )
+        ])
     }
 
     return (
-        <div className="flex">
-            <div className="container">
-            {
-                messages.map(message => {
-                return(
-                    <div className={`row ${message.side === 'inbox' ? 'justify-content-end' : ''}`}>
-                        <div className="col-5">
-                            <div className={message.side}>
-                                {message.text}
-                                <div>
-                                {message.author}
-                                </div>
-                                <Button variant="danger" onClick={() => {deleteMessage(message.id)}}>Delete</Button>{' '}
-                            </div>
-                        </div>
-                    </div>            
-                    )
-                })
-            }
-            </div>
+        <div className="App">
+            <header>
+                <h1>количество задач № {todos.length}</h1>
+            </header>
+            <main>
+                {
+                    todos.map(todo => {
+                        return (
+                            <ToDo
+                                key={todo.id}
+                                todo={todo}
+                                removeTask={removeTask}
+                                handlerToggle={handlerToggle}
+                            />
+                        )
+                    })
+                }
+                <ToDoForm addTask={addTask}/>
+            </main>
         </div>
     )
 }
