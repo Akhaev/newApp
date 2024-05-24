@@ -14,9 +14,6 @@ header {
     margin-bottom: 45px;
 }
 
-main {
-}
-
 .item-todo {
     display: flex;
     justify-content: space-between;
@@ -60,4 +57,9 @@ input:focus {outline:none!important;}
 form {
     display: flex;
     align-items: center;
+}
+
+.strike {
+    text-decoration: line-through;
+    color: #00CF00;
 }
